@@ -5,7 +5,7 @@ function Card({text}) {
     return (
         <>
             <div className='card'>
-                <h3>Developpeur Python</h3>
+                <h3>De</h3>
                 <p>
                    {text} 
                 </p>

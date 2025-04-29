@@ -14,7 +14,7 @@ export const navigation = [
     },{ 
         path : '/contact',
         url : 'Contact'
-    } 
+    }, 
 ]
 
 export const cardData = [
