@@ -1,0 +1,32 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import './App.css'
+import Header from '../components/Header/Header'
+
+function App() {
+
+  return (
+    <>
+     <Router>
+      <Header/>
+        {
+          cardData.map((data) => (
+            <Card text={data.text} />
+          ))}{
+          jobs.map((item, index) => (
+            <JobsCard
+              index={index}
+              logo={item.logo}
+              title={item.title}
+              name={item.name}
+              location={item.location}
+              contrat={item.contrat}
+              salary={item.salary}
+            />
+          ))
+        } */}
+     </Router>
+    </>
+  )
+}
+
+export default App
