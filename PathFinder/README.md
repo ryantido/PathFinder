@@ -1,12 +1,62 @@
-# React + Vite
+# PATHFINDER JOB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plateforme web d’orientation professionnelle : quiz, suggestions métiers, offres d’emploi filtrables, espace utilisateur sécurisé, back-office admin.
 
-Currently, two official plugins are available:
+## Structure du projet
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `backend/` : API Node.js/Express/Prisma/PostgreSQL (TypeScript)
+- `frontend/` : Next.js (TypeScript), Tailwind CSS, Zustand, etc.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation rapide
+
+### 1. Backend
+```bash
+cd backend
+npm install
+npx prisma generate
+npx prisma migrate dev --name init
+npm run dev
+```
+
+Variables à renseigner dans `.env` (voir `.env.example`).
+
+### 2. Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## Fonctionnalités principales
+- Authentification sécurisée (JWT cookie HTTP-Only)
+- Quiz multi-étapes, calcul score, suggestion métiers
+- Catalogue offres d’emploi filtrable
+- Espace utilisateur (profil, favoris, alertes)
+- Back-office admin (à venir)
+
+## Tests
+- Backend : `npm test` (Jest + Supertest)
+- Frontend : à venir (Jest + React Testing Library)
+
+## CI/CD & déploiement
+- Backend : Heroku/Render
+- Frontend : Vercel
+- PostgreSQL managé
+
+---
+
+## Conventions
+- Branches : `main`, `develop`, `feature/*`
+- Variables d’environnement : UPPER_SNAKE_CASE
+- Fichiers TypeScript : camelCase
+- Composants React : PascalCase
+
+---
+
+## Pour aller plus loin
+- Voir `docs/API_SPEC.md` et `docs/ERD.pdf` pour la documentation technique.
+- Contact : équipe Pathfinder

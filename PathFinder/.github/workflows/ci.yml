@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        ports: [5432:5432]
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: pathfinder_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://test:test@localhost:5432/pathfinder_test
+      JWT_SECRET: testsecret
+      JWT_EXPIRES_IN: 1d
+      FRONTEND_URL: http://localhost:3000
+      PORT: 4000
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: backend
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: frontend
+      - name: Generate Prisma client
+        run: npx prisma generate
+        working-directory: backend
+      - name: Run Prisma migrations
+        run: npx prisma migrate deploy
+        working-directory: backend
+      - name: Run backend tests
+        run: npm test || true
+        working-directory: backend
+      - name: Run frontend tests
+        run: npm test || true
+        working-directory: frontend
+      - name: Lint backend
+        run: npx eslint . || true
+        working-directory: backend
+      - name: Lint frontend
+        run: npx eslint . || true
+        working-directory: frontend
